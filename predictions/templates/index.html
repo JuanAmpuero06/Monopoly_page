@@ -1,69 +1,89 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Predicción de Compras en Cuotas</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Formulario de Predicción</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <div>
-            <label>¿Haz hecho alguna compra nacional en diciembre? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T12" min="0" max="1" required>
+    <div class="container">
+        <h1>Formulario de Predicción</h1>
+        <div class="form-container">
+            <form method="POST" class="prediction-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en diciembre?</p>
+                    <label><input type="radio" name="FlgActCN_T12" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T12" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en noviembre?</p>
+                    <label><input type="radio" name="FlgActCN_T11" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T11" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en octubre?</p>
+                    <label><input type="radio" name="FlgActCN_T10" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T10" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en septiembre?</p>
+                    <label><input type="radio" name="FlgActCN_T09" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T09" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en agosto?</p>
+                    <label><input type="radio" name="FlgActCN_T08" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T08" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en julio?</p>
+                    <label><input type="radio" name="FlgActCN_T07" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T07" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en junio?</p>
+                    <label><input type="radio" name="FlgActCN_T06" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T06" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en mayo?</p>
+                    <label><input type="radio" name="FlgActCN_T05" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T05" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en abril?</p>
+                    <label><input type="radio" name="FlgActCN_T04" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T04" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en marzo?</p>
+                    <label><input type="radio" name="FlgActCN_T03" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T03" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en diciembre?</p>
+                    <label><input type="radio" name="FlgActCN_T02" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T02" value="0"> No</label>
+                </div>
+                <div class="form-group">
+                    <p>¿Haz hecho alguna compra nacional en enero?</p>
+                    <label><input type="radio" name="FlgActCN_T01" value="1" required> Sí</label>
+                    <label><input type="radio" name="FlgActCN_T01" value="0"> No</label>
+                </div>
+                <button type="submit" class="btn-submit">Predecir</button>
+            </form>
         </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en noviembre? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T11" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en octubre? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T10" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en septiembre? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T09" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en agosto? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T08" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en julio? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T07" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en junio? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T06" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en mayo? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T05" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en abril? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T04" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en marzo? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T03" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en febrero? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T02" min="0" max="1" required>
-        </div>
-        <div>
-            <label>¿Haz hecho alguna compra nacional en enero? (1=Sí, 0=No)</label>
-            <input type="number" name="FlgActCN_T01" min="0" max="1" required>
-        </div>
-        <button type="submit">Predecir</button>
-    </form>
+    </div>
 
     {% if prediction %}
-    <h2>Resultado</h2>
-    <p><strong>Predicción:</strong> {{ prediction }}</p>
-    <p><strong>Probabilidad:</strong> {{ probability }}</p>
+    <div class="result-container">
+        <h2>Resultado</h2>
+        <p><strong>Predicción:</strong> {{ prediction }}</p>
+        <p><strong>Probabilidad:</strong> {{ probability }}%</p>
+    </div>
     {% endif %}
 </body>
 </html>

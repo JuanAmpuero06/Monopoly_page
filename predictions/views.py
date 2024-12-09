@@ -1,8 +1,7 @@
+from django.shortcuts import render
+import joblib
 import os
 import pandas as pd
-import joblib
-from django.shortcuts import render
-from django.http import JsonResponse
 
 # Define the path to the model
 MODEL_PATH = os.path.join(os.path.dirname(__file__), '..', 'xgb_model.pkl')
@@ -10,10 +9,12 @@ MODEL_PATH = os.path.join(os.path.dirname(__file__), '..', 'xgb_model.pkl')
 # Load the model
 model = joblib.load(MODEL_PATH)
 
-# View for prediction
 def index(request):
+    prediction = None
+    probability = None
+
     if request.method == 'POST':
-        # Collect form data
+        # Obtener los datos del formulario
         inputs = {
             'FlgActCN_T12': int(request.POST.get('FlgActCN_T12', 0)),
             'FlgActCN_T11': int(request.POST.get('FlgActCN_T11', 0)),
@@ -27,19 +28,23 @@ def index(request):
             'FlgActCN_T03': int(request.POST.get('FlgActCN_T03', 0)),
             'FlgActCN_T02': int(request.POST.get('FlgActCN_T02', 0)),
             'FlgActCN_T01': int(request.POST.get('FlgActCN_T01', 0)),
+            # Agrega el resto de las variables aquí
         }
 
-        # Create a DataFrame for prediction
+        # Convertir los datos del formulario a un DataFrame para hacer la predicción
         input_df = pd.DataFrame([inputs])
 
-        # Predict using the model
+        # Realizar la predicción
         prediction = model.predict(input_df)[0]
-        probability = model.predict_proba(input_df)[0, 1]
+        probability = model.predict_proba(input_df)[:, 1][0]  # Obtener la probabilidad para la clase 1
 
-        # Return response
-        return JsonResponse({
+        # Pasar los resultados al contexto
+        return render(request, 'index.html', {
             'prediction': 'Realizará compras en cuotas' if prediction == 1 else 'No realizará compras en cuotas',
             'probability': f'{probability:.2f}'
         })
 
-    return render(request, 'index.html')
+    return render(request, 'index.html', {
+        'prediction': prediction,
+        'probability': probability
+    })
